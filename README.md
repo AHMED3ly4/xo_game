@@ -1,6 +1,6 @@
 # xo_game
 
-A new Flutter project.
+xo game using flutter.
 
 ## Getting Started
 
