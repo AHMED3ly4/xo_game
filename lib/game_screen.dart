@@ -31,6 +31,7 @@ class _GameScreenState extends State<GameScreen> {
           turn++;
         }
       }
+      if(turn>9){newRound();}
     }
     setState(() {
 
