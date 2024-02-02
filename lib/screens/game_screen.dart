@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xo_game/cell.dart';
-import 'package:xo_game/main.dart';
+import 'package:xo_game/tools/cell.dart';
+import 'package:xo_game/tools/home_screen_args.dart';
 
 class GameScreen extends StatefulWidget {
 static const routeName = 'game screen';
@@ -73,12 +73,15 @@ class _GameScreenState extends State<GameScreen> {
     cells=List.generate(9, (index) => '');
     turn=1;
   }
+
   List<String> cells=List.generate(9, (index) => '');
   @override
   Widget build(BuildContext context) {
+    HomeScreenArgs args = ModalRoute.of(context)!.settings.arguments as HomeScreenArgs;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'X_o Game',
           style: TextStyle(fontSize: 30),
         ),
@@ -91,23 +94,23 @@ class _GameScreenState extends State<GameScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text('Player1 : $player1Score',
-                style: TextStyle(fontSize: 30),
+                Text('${args.firstPlayer} : $player1Score',
+                style: const TextStyle(fontSize: 30,color: Colors.blue),
                 ),
-                Text('Player2 : $player2Score',
-                style: TextStyle(fontSize: 30),
+                Text('${args.secondPlayer} : $player2Score',
+                style: const TextStyle(fontSize: 30,color: Colors.deepOrange),
                 ),
               ],
             ),
           ),
           Expanded(
             child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                   childAspectRatio: 0.78,
                 ),
                 itemBuilder: (context,index)=>Cell(text: cells[index],whatToDo: onCellClicked,index: index),
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: cells.length,
             ),
           ),
